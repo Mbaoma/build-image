@@ -29,4 +29,4 @@ runs:
       uses: actions/checkout@v2
     - name: Build and Push Docker Image
       shell: bash
-      run: python main.py
+      run: python Mbaoma/build-image/main.py
