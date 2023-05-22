@@ -19,9 +19,7 @@ inputs:
   tags:
     description: 'The tags to assign to the Docker image'
     required: true
-# outputs:
-#   image-tag:
-#     description: 'The tag of the built Docker image'
+    
 runs:
   using: 'composite'
   steps:
