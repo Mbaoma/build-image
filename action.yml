@@ -1,0 +1,32 @@
+name: Build Docker Image
+description: Builds a Docker image based on the specified configuration
+inputs:
+  image-name:
+    description: 'The name of the Docker image to build'
+    required: true
+  dockerfile-path:
+    description: 'The path to the Dockerfile'
+    required: true
+  registry:
+    description: 'The container registry to push the image to'
+    required: true
+  registry-username:
+    description: 'The username for authenticating with the container registry'
+    required: true
+  registry-password:
+    description: 'The password or secret for authenticating with the container registry'
+    required: true
+  tags:
+    description: 'The tags to assign to the Docker image'
+    required: true
+# outputs:
+#   image-tag:
+#     description: 'The tag of the built Docker image'
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Build and Push Docker Image
+      shell: bash
+      run: python main.py
