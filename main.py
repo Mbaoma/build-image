@@ -26,12 +26,12 @@ def build_and_push_docker_image(image_name, dockerfile_path, registry, username,
 
 def main():
     # Get the inputs from the workflow environment variables
-    image_name = os.environ['INPUT_IMAGE_NAME']
-    dockerfile_path = os.environ['INPUT_DOCKERFILE_PATH']
-    registry = os.environ['INPUT_REGISTRY']
-    username = os.environ['INPUT_REGISTRY_USERNAME']
-    password = os.environ['INPUT_REGISTRY_PASSWORD']
-    tags = os.environ['INPUT_TAGS'].split(',')
+    image_name = os.environ['image-name']
+    dockerfile_path = os.environ['dockerfile-path']
+    registry = os.environ['registry']
+    username = os.environ['registry-username']
+    password = os.environ['registry-password']
+    tags = os.environ['tags'].split(',')
 
     # Authenticate with GitHub to access secrets
     token = os.environ['GITHUB_TOKEN']
@@ -39,7 +39,7 @@ def main():
     repository = github.get_repo(os.environ['GITHUB_REPOSITORY'])
 
     # Authenticate with the container registry
-    password = repository.get_secret(os.environ['INPUT_REGISTRY_PASSWORD']).value
+    password = repository.get_secret(os.environ['registry-password']).value
 
     # Build and push the Docker image
     build_and_push_docker_image(image_name, dockerfile_path, registry, username, password, tags)
