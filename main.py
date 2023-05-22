@@ -33,7 +33,7 @@ def main():
     password = os.environ['registry-password']
     tags = os.environ['tags'].split(',')
 
-    # Authenticate with GitHub to access secrets
+    # Authenticate with GitHub to access secret
     token = os.environ['GITHUB_TOKEN']
     github = Github(token)
     repository = github.get_repo(os.environ['GITHUB_REPOSITORY'])
