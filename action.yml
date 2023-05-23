@@ -142,7 +142,7 @@ inputs:
      description: "Your secrets.GITHUB_TOKEN"
      required: true
 
-  image-name:
+  image_name:
     description: 'The name of the Docker image to build'
     required: true
 
