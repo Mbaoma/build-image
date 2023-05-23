@@ -20,13 +20,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image using GlueOps
-        uses: glueops/build-image@v0.1.0
+      - name: Build and Push Docker Image
+        uses: Mbaoma/build-image@v2.0
         with:
-          image-name: my-image
+          image-name: ${{ github.repository }} 
+          dockerfile-path: 'Dockerfile'
           registry: ghcr.io
           registry-username: ${{ github.actor }}
           registry-password: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           tags: ${{ github.repository_owner }}/${{ github.repository }}:${{ github.sha }}
 ```
 

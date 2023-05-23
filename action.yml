@@ -28,14 +28,9 @@ inputs:
     description: 'The username for authenticating with the container registry (defaults to the github.actor)'
     required: false
 
-
   docker_io_token:
     description: "Your docker.io token created via https://hub.docker.com/settings/security"
     required: false
-  
-  # registry-password:
-  #   description: 'The password or secret for authenticating with the container registry'
-  #   required: true
   
   tags:
     description: 'The tags to assign to the Docker image'
@@ -74,7 +69,7 @@ runs:
           fi
         fi
         
-        # lowercase the image name, see https://github.com/macbre/push-to-ghcr/issues/12
+        # convert image name to lowercase
         export IMAGE_NAME=$(echo ${IMAGE_NAME} | tr '[:upper:]' '[:lower:]')
 
         echo "Tagging with ${COMMIT_TAG}"
