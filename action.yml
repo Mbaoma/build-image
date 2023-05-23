@@ -39,7 +39,7 @@ inputs:
   
   tags:
     description: 'The tags to assign to the Docker image'
-    required: true
+    required: false
 
 runs:
   using: "composite"
