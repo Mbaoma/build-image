@@ -33,6 +33,10 @@ inputs:
     description: "Your docker.io token created via https://hub.docker.com/settings/security"
     required: false
   
+  registry-password:
+    description: 'The password or secret for authenticating with the container registry'
+    required: true
+  
   tags:
     description: 'The tags to assign to the Docker image'
     required: true
