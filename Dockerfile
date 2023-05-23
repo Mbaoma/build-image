@@ -5,7 +5,7 @@ RUN apk update \
   && apk -a info curl \
   && apk add curl
 
-# these two are passed as build args
+# these two are passed as build arguments
 ARG BUILD_DATE
 ARG GITHUB_SHA
 
