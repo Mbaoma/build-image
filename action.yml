@@ -77,20 +77,20 @@ runs:
         export BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
         export GITHUB_URL=https://github.com/${{ github.repository }}
 
-        echo "::group::Building the Docker image: ${{ inputs.repository }}/${IMAGE_NAME}:${COMMIT_TAG} from ${{ inputs.dockerfile }} in ${{ inputs.context}} context ..."
+        echo "::group::Building the Docker image: ghcr.io/${IMAGE_NAME}:${COMMIT_TAG} from ${{ inputs.dockerfile }} in ${{ inputs.context}} context ..."
 
         # https://docs.docker.com/develop/develop-images/build_enhancements/
         # https://docs.docker.com/engine/reference/commandline/build/#specifying-external-cache-sources
         >&0 docker build \
           --file ${{ inputs.dockerfile }} \
           --progress tty \
-          --cache-from ${{ inputs.repository }}/${IMAGE_NAME}:latest \
+          --cache-from ghcr.io/${IMAGE_NAME}:latest \
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           \
           --build-arg BUILD_DATE=${BUILD_DATE} \
           --build-arg GITHUB_SHA=${GITHUB_SHA} \
           \
-          --tag ${{ inputs.repository }}/${IMAGE_NAME}:${COMMIT_TAG} \
+          --tag ghcr.io/${IMAGE_NAME}:${COMMIT_TAG} \
           --tag docker.io/${IMAGE_NAME}:${COMMIT_TAG} \
           \
           --label org.label-schema.build-date=${BUILD_DATE} \
@@ -108,15 +108,15 @@ runs:
         docker images
 
         echo "Labels:"
-        docker image inspect ${{ inputs.repository }}/${IMAGE_NAME}:${COMMIT_TAG} | jq '.[].Config.Labels'
+        docker image inspect ghcr.io/${IMAGE_NAME}:${COMMIT_TAG} | jq '.[].Config.Labels'
 
         echo "Env variables:"
-        docker image inspect ${{ inputs.repository }}/${IMAGE_NAME}:${COMMIT_TAG} | jq '.[].Config.Env'
+        docker image inspect ghcr.io/${IMAGE_NAME}:${COMMIT_TAG} | jq '.[].Config.Env'
 
         echo "::endgroup::"
 
-        echo "::group::Pushing the Docker image to ${{ inputs.repository }} ..."
-        >&0 docker push ${{ inputs.repository }}/${IMAGE_NAME}:${COMMIT_TAG} && echo "Pushed"
+        echo "::group::Pushing the Docker image to ghcr.io ..."
+        >&0 docker push ghcr.io/${IMAGE_NAME}:${COMMIT_TAG} && echo "Pushed"
         echo "::endgroup::"
 
         if [ -z "${DOCKER_IO_TOKEN}" ]; then
