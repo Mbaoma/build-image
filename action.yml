@@ -65,7 +65,7 @@ runs:
 
         else
           if [ -z ${IMAGE_TAG} ]; then
-            export BRANCH_NAME="${GITHUB.BRANCH}"
+            export BRANCH_NAME="${GITHUB.REF#refs/heads/}"
             export COMMIT_TAG="${GITHUB.SHA:0:7}"
             export COMMIT_TAG="${GITHUB.SHA}"
           else
@@ -107,7 +107,7 @@ runs:
         >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:${GITHUB.SHA:0:7}
         >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:v${GITHUB.REF_NAME}
         >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:{GITHUB.SHA}
-        >$0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:{GITHUB.BRANCH}
+        >$0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:{GITHUB.REF#refs/heads/}
 
         echo "::endgroup::"
 
