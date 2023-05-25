@@ -1,11 +1,19 @@
 # build-image-v1.0
-my attempt at building a custom GitHub action that builds a Docker image
+My attempt at building a custom GitHub action that builds a Docker image
 
 ### Setup
 - Create a virtual environment and install the requirements stored in the ```requirements.txt``` file.
 ```python
 $ python -m venv venv
 $ pip install -r requirements.txt
+```
+
+# Pushing to GitHub
+```bash
+$ git add .
+$ git commit -m 'commit-message
+$ git tag -a -m "Description of this release" v1
+$ git push --follow-tags
 ```
 
 ### Use
@@ -24,12 +32,8 @@ jobs:
         uses: Mbaoma/build-image@v2.0
         with:
           image-name: ${{ github.repository }} 
-          dockerfile-path: 'Dockerfile'
-          registry: ghcr.io
-          registry-username: ${{ github.actor }}
-          registry-password: ${{ secrets.GITHUB_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tags: ${{ github.repository_owner }}/${{ github.repository }}:${{ github.sha }}
+
 ```
 
 Notes
