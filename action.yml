@@ -84,7 +84,7 @@ runs:
         >&0 docker build \
           --file ${{ inputs.dockerfile }} \
           --progress tty \
-          --cache-from ghcr.io/${IMAGE_NAME}:latest \
+          --cache-from ${{ inputs.registry }}/${IMAGE_NAME}:latest \
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           \
           --build-arg BUILD_DATE=${BUILD_DATE} \
