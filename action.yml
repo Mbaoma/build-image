@@ -92,9 +92,9 @@ runs:
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           --build-arg BUILD_DATE="${BUILD_DATE}" \
           --build-arg GITHUB_SHA="${GITHUB_SHA}" \
-          -t "ghcr.io/${IMAGE_NAME}:${COMMIT_TAG}" \
-          -t "ghcr.io/${IMAGE_NAME}:${SHORT_SHA}" \
-          -t "ghcr.io/${IMAGE_NAME}:${SHA}" \
+          -t "${IMAGE_NAME}:${COMMIT_TAG}" \
+          -t "${IMAGE_NAME}:${SHORT_SHA}" \
+          -t "${IMAGE_NAME}:${SHA}" \
           --label "org.label-schema.build-date=${BUILD_DATE}" \
           --label "org.label-schema.vcs-url=${GITHUB_URL}" \
           --label "org.label-schema.vcs-ref=${GITHUB_SHA}" \
