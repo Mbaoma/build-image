@@ -107,7 +107,7 @@ runs:
         docker image ls
 
         echo "Labels:"
-        docker image inspect "ghcr.io/${IMAGE_NAME}:${COMMIT_TAG}" | jq '.[].Config.Labels
+        docker image inspect "ghcr.io/${IMAGE_NAME}:${COMMIT_TAG}" | jq '.[].Config.Labels'
 
         echo "Env variables:"
         docker image inspect "ghcr.io/${IMAGE_NAME}:${COMMIT_TAG}" | jq '.[].Config.Env'
