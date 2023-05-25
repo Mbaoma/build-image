@@ -69,7 +69,7 @@ runs:
             export COMMIT_TAG="${GITHUB.SHA:0:7}"
             export COMMIT_TAG="${GITHUB.SHA}"
           else
-            export BRANCH_NAME="${GITHUB.BRANCH}"
+            export BRANCH_NAME="${GITHUB.REF#refs/heads/}"
             export COMMIT_TAG="${GITHUB.SHA:0:7}"
             export COMMIT_TAG="${GITHUB.SHA}"
           fi
