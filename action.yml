@@ -48,7 +48,7 @@ runs:
         DOCKER_IO_USER: ${{ inputs.registry-username }}
         DOCKER_IO_TOKEN: ${{ inputs.docker_io_token }}
         IMAGE_NAME: ${{ inputs.image_name }}
-        IMAGE_TAG: ${{ inputs.tags }}3
+        IMAGE_TAG: ${{ inputs.tags }}
       run: |
         echo "Using $(docker -v)"
 
@@ -61,15 +61,9 @@ runs:
           export COMMIT_TAG_SHORT="${{ github.sha }}"
           export COMMIT_TAG="${COMMIT_TAG_SHORT:0:7}"
         else
-          if [ -z "${IMAGE_TAG}" ]; then
             export BRANCH_NAME="${GITHUB_REF#refs/heads/}"
             export COMMIT_TAG_SHORT="${{ github.sha }}"
             export COMMIT_TAG="${COMMIT_TAG_SHORT:0:7}"
-          else
-            export BRANCH_NAME="${GITHUB_REF#refs/heads/}"
-            export COMMIT_TAG_SHORT="${{ github.sha }}"
-            export COMMIT_TAG="${COMMIT_TAG_SHORT:0:7}"
-          fi
         fi
 
         # convert image name to lowercase
