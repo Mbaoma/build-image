@@ -60,18 +60,18 @@ runs:
         if [ "${{ github.event_name }}" = "release" ]; then
           
           export COMMIT_TAG="${GITHUB.SHA:0:7}"
-          export COMMIT_TAG="${GITHUB.SHA}"
-          export RELEASE_VERSION="v${GITHUB.REF_NAME}"
+          # export COMMIT_TAG="${GITHUB.SHA}"
+          # export RELEASE_VERSION="v${GITHUB.REF_NAME}"
 
         else
           if [ -z ${IMAGE_TAG} ]; then
-            export BRANCH_NAME="${GITHUB.REF#refs/heads/}"
+            # export BRANCH_NAME="${GITHUB.REF#refs/heads/}"
             export COMMIT_TAG="${GITHUB.SHA:0:7}"
-            export COMMIT_TAG="${GITHUB.SHA}"
+            # export COMMIT_TAG="${GITHUB.SHA}"
           else
-            export BRANCH_NAME="${GITHUB.REF#refs/heads/}"
+            # export BRANCH_NAME="${GITHUB.REF#refs/heads/}"
             export COMMIT_TAG="${GITHUB.SHA:0:7}"
-            export COMMIT_TAG="${GITHUB.SHA}"
+            # export COMMIT_TAG="${GITHUB.SHA}"
           fi
         fi
 
@@ -104,10 +104,10 @@ runs:
           ${{ inputs.context }}
 
         # Additional tags
-        >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:${GITHUB.SHA:0:7}
-        >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${RELEASE_VERSION} ${{ inputs.registry }}/${IMAGE_NAME}:${GITHUB.REF}
-        >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:{GITHUB.SHA}
-        >$0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${BRANCH_NAME} ${{ inputs.registry }}/${IMAGE_NAME}:v{GITHUB.REF#refs/heads/}
+        # >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:${GITHUB.SHA:0:7}
+        # >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${RELEASE_VERSION} ${{ inputs.registry }}/${IMAGE_NAME}:${GITHUB.REF}
+        # >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:{GITHUB.SHA}
+        # >$0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${BRANCH_NAME} ${{ inputs.registry }}/${IMAGE_NAME}:v{GITHUB.REF#refs/heads/}
 
         echo "::endgroup::"
 
