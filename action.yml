@@ -58,14 +58,17 @@ runs:
 
         echo "::group::Set commit tag and image name"
         if [ "${{ github.event_name }}" = "release" ]; then
-          export COMMIT_TAG="${{ github.sha | slice(0, 7) }}"
+          export COMMIT_TAG_SHORT="${{ github.sha }}"
+          export COMMIT_TAG="${COMMIT_TAG_SHORT:0:7}"
         else
           if [ -z "${IMAGE_TAG}" ]; then
             export BRANCH_NAME="${GITHUB_REF#refs/heads/}"
-            export COMMIT_TAG="${{ github.sha | slice(0, 7) }}"
+            export COMMIT_TAG_SHORT="${{ github.sha }}"
+            export COMMIT_TAG="${COMMIT_TAG_SHORT:0:7}"
           else
             export BRANCH_NAME="${GITHUB_REF#refs/heads/}"
-            export COMMIT_TAG="${{ github.sha | slice(0, 7) }}"
+            export COMMIT_TAG_SHORT="${{ github.sha }}"
+            export COMMIT_TAG="${COMMIT_TAG_SHORT:0:7}"
           fi
         fi
 
@@ -97,11 +100,7 @@ runs:
           --label org.opencontainers.image.revision="${GITHUB_SHA}" \
           "${{ inputs.context }}"
 
-        # Additional tags
-        docker tag "${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG}" "${{ inputs.registry }}/${IMAGE_NAME}:${github.sha | slice(0, 7) | slice(0, 7)}"
-        docker tag "${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG}" "${{ inputs.registry }}/${IMAGE_NAME}:v${GITHUB_REF#refs/heads/}"
-        docker tag "${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG}" "${{ inputs.registry }}/${IMAGE_NAME}:${github.sha}"
-
+      
         echo "::endgroup::"
 
         echo "::group::Inspecting the image ..."
