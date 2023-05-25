@@ -14,6 +14,7 @@ inputs:
   dockerfile-path:
     description: 'The path to the Dockerfile'
     required: true
+    default: "Dockerfile"
 
   context:
     description: "A path to the context in which the build will happen, see https://docs.docker.com/engine/reference/commandline/build/"
@@ -23,6 +24,7 @@ inputs:
   registry:
     description: 'The container registry to push the image to'
     required: true
+    default: "ghcr.io"
   
   registry-username:
     description: 'The username for authenticating with the container registry (defaults to the github.actor)'
