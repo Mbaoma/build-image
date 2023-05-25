@@ -105,9 +105,9 @@ runs:
 
         # Additional tags
         >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:${GITHUB.SHA:0:7}
-        >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:${GITHUB.REF}
+        >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${RELEASE_VERSION} ${{ inputs.registry }}/${IMAGE_NAME}:${GITHUB.REF}
         >&0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:{GITHUB.SHA}
-        >$0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${COMMIT_TAG} ${{ inputs.registry }}/${IMAGE_NAME}:v{GITHUB.REF#refs/heads/}
+        >$0 docker tag ${{ inputs.registry }}/${IMAGE_NAME}:${BRANCH_NAME} ${{ inputs.registry }}/${IMAGE_NAME}:v{GITHUB.REF#refs/heads/}
 
         echo "::endgroup::"
 
