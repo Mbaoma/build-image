@@ -11,7 +11,7 @@ $ pip install -r requirements.txt
 # Pushing to GitHub
 ```bash
 $ git add .
-$ git commit -m 'commit-message
+$ git commit -m 'commit-message'
 $ git tag -a -m "Description of this release" v1
 $ git push --follow-tags
 ```
