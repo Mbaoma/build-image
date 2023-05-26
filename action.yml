@@ -8,11 +8,11 @@ inputs:
      required: true
 
   image_name:
-    description: 'The name of the Docker image to build'
+    description: 'Name your Docker image'
     required: true
 
   dockerfile-path:
-    description: 'The path to the Dockerfile'
+    description: 'path to the Dockerfile'
     required: true
     default: "Dockerfile"
 
@@ -27,7 +27,7 @@ inputs:
     default: "ghcr.io"
   
   registry-username:
-    description: 'The username for authenticating with the container registry (defaults to the github.actor)'
+    description: 'The username for authentication to the container registry (defaults to the github.actor)'
     required: false
 
   docker_io_token:
@@ -73,7 +73,7 @@ runs:
           fi
         fi
 
-        # lowercase the image name, see https://github.com/macbre/push-to-ghcr/issues/12
+        # convert the image name to lowercase
         export IMAGE_NAME=$(echo "${IMAGE_NAME}" | tr '[:upper:]' '[:lower:]')
 
         echo "Tagging with ${COMMIT_TAG}"
@@ -84,7 +84,7 @@ runs:
         export BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
         export GITHUB_URL=https://github.com/${{ github.repository }}
 
-        echo "::group::Building the Docker image: ghcr.io/${IMAGE_NAME}:${COMMIT_TAG} from ${{ inputs.dockerfile }} in ${{ inputs.context }} context ..."
+        echo "::group::Building the Docker image as ghcr.io/${IMAGE_NAME}:${COMMIT_TAG} from ${{ inputs.dockerfile }} in ${{ inputs.context }} context ..."
 
         docker build \
           --file "${{ inputs.dockerfile }}" \
@@ -117,7 +117,7 @@ runs:
 
         echo "::endgroup::"
 
-        echo "::group::Pushing the Docker image to ghcr.io ..."
+        echo "::group::Pushing the image to ghcr.io ..."
         docker push --all-tags "ghcr.io/${IMAGE_NAME}" && echo "Pushed"
         echo "::endgroup::"
 
@@ -128,7 +128,7 @@ runs:
             export DOCKER_IO_USER="${{ github.actor }}"
           fi
 
-          echo "::group::Pushing the Docker image to docker.io as ${DOCKER_IO_USER}..."
+          echo "::group::Pushing the image to docker.io as ${DOCKER_IO_USER}..."
           echo "${DOCKER_IO_TOKEN}" | docker login docker.io -u "${DOCKER_IO_USER}" --password-stdin
 
           docker push --all-tags "docker.io/${IMAGE_NAME}:${COMMIT_TAG}" && echo "Pushed"
