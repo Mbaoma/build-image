@@ -61,12 +61,12 @@ runs:
 
         echo "::group::Set commit tags"
         if [ "${{ github.event_name }}" = "release" ]; then
-          export COMMIT_TAG=v${{ github.event.release.tag_name }}
+          export COMMIT_TAG=${{ github.event.release.tag_name }}
           export SHA="${{ github.sha }}"
           export SHORT_SHA="${SHA:0:7}"
         else
           if [ -z "${IMAGE_TAG}" ]; then
-            export COMMIT_TAG="${{ github.event.release.tag_name }}"
+            export COMMIT_TAG="${GITHUB_REF#refs/heads/}"
             export SHA="${{ github.sha }}"
             export SHORT_SHA="${SHA:0:7}"
           fi
