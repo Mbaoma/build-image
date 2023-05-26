@@ -1,19 +1,21 @@
 # build-image-v1.0
 My attempt at building a custom GitHub action that builds a Docker image
 
-### Setup
-- Create a virtual environment and install the requirements stored in the ```requirements.txt``` file.
-```python
-$ python -m venv venv
-$ pip install -r requirements.txt
-```
-
 # Pushing to GitHub
 ```bash
 $ git add .
 $ git commit -m 'commit-message'
 $ git tag -a -m "Description of this release" v1
 $ git push --follow-tags
+```
+- Delete a tag remotely
+```bash
+$ git push --delete origin v1.0
+```
+
+- Delete a tag locally
+```bash
+$ git tag --delete tagname
 ```
 
 ### Use
