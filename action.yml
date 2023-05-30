@@ -1,5 +1,5 @@
 name: "Build Docker Image and Push to GHCR"
-author: "@mbaoma"
+author: "@Mbaoma"
 description: "Abstracts pushing Docker images to ghcr.io"
 
 inputs:
