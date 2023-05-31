@@ -6,6 +6,7 @@ inputs:
   github_token: 
      description: "Your secrets.GITHUB_TOKEN"
      required: true
+     default: github.token
 
   image_name:
     description: 'Docker image is named after repository'
