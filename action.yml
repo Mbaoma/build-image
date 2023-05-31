@@ -6,8 +6,7 @@ inputs:
   github_token: 
      description: "Personal Access Token (PAT) used to authenticate with the GitHub Container Registry."
      required: true
-     default: ${{ env.GITHUB_TOKEN }}
-    #  default: ${{ github.token }}
+     default: ${{ github.token }}
 
   image_name:
     description: 'Docker image is named after repository'
