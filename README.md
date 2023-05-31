@@ -61,3 +61,4 @@ These automated tagging processes ensures that you can easily track and identify
 
 ## 🏳️ Defaults
 - Your ```Dockerfile``` has to be in the root directory.
+- Your ```docker image``` is named after your repository.
