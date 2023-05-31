@@ -50,7 +50,7 @@ runs:
         IMAGE_TAG: ${{ inputs.tags }}
 
       run: |
-        env
+        ls -al
         echo "Using $(docker -v)"
         
         if [ -z "${DOCKER_IO_USER}" ]; then
