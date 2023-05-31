@@ -6,7 +6,7 @@ inputs:
   github_token: 
      description: "Your secrets.GITHUB_TOKEN"
      required: true
-     default: github.token
+     default: ${{ github.token }}
 
   image_name:
     description: 'Docker image is named after repository'
@@ -31,10 +31,6 @@ inputs:
   registry-username:
     description: 'The username for authentication to the container registry (defaults to the github.actor)'
     required: false
-
-  # docker_io_token:
-  #   description: "Your docker.io token created via https://hub.docker.com/settings/security"
-  #   required: false
   
   tags:
     description: 'The tags to assign to the Docker image'
@@ -58,7 +54,7 @@ runs:
         echo "Using $(docker -v)"
 
         echo "::group::Logging into the GitHub Container registry ..."
-        echo "${GITHUB_TOKEN}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         echo "::endgroup::"
 
         echo "::group::Set commit tags"
