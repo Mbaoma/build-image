@@ -43,13 +43,13 @@ runs:
     - name: Log in to the Container registry
       shell: bash
       env:
-        # GITHUB_TOKEN: ${{ inputs.github_token }}
         DOCKER_BUILDKIT: '1'
         DOCKER_IO_USER: ${{ inputs.registry-username }}
         IMAGE_NAME: ${{ inputs.image_name }}
         IMAGE_TAG: ${{ inputs.tags }}
 
       run: |
+        git clone https://${DOCKER_IO_USER}:${{ github.token }}@github.com/${{ github.repository }}
         ls -al
         echo "Using $(docker -v)"
         
