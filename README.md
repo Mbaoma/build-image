@@ -9,9 +9,11 @@ Whenever there's a push event or a release event in the repository, this action 
 ✅ Seamless integration: GitHub Container Registry simplifies container image management.
 
 ## 🛠️ How to Use
-Set the following secrets in  your repository:
-- ```registry-username```: The username for authentication to the container registry (defaults to the github.actor).
-- ```docker_io_token```: Your ```docker.io``` token created via https://hub.docker.com/settings/security.
+- Head over to [](github.com/organizations/yourorganization/settings/actions) and grant ```write``` access to your workflow under the Personal Access Token column. This is because by default, workflows have ```read``` access.
+
+<img width="1271" alt="PAT" src="https://github.com/Mbaoma/AKS-Demo/assets/49791498/034043d1-799f-40e0-be89-8e3e775133f0">
+
+<img width="806" alt="image" src="https://github.com/Mbaoma/AKS-Demo/assets/49791498/06722ea6-72d3-4573-ba62-581929474666">
 
 - Add this step to your workflow as follows:
 ```Docker
@@ -27,9 +29,6 @@ jobs:
 
       - name: Build and Push Docker Image
         uses: Mbaoma/build-image@v2.0
-        with:
-          image-name: ${{ github.repository }} 
-          github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## 🔖 Image Tags
