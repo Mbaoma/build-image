@@ -1,5 +1,7 @@
 # Custom Action to push Docker images to GitHub Container Registry
-Whenever there's a push event or a release event in the repository, this action automatically pushes the Docker image to ghcr.io. No more manual hassle! 🚀💪
+Whenever there's a push event or a release event in the repository, this action automatically pushes the Docker image to ghcr.io. 
+
+No more manual hassle! 🚀💪
 
 ## 💡 Benefits:
 ✅ Streamlined workflow: Say goodbye to tedious configuration and manual image deployments.
@@ -9,24 +11,37 @@ Whenever there's a push event or a release event in the repository, this action 
 ✅ Seamless integration: GitHub Container Registry simplifies container image management.
 
 ## 🛠️ How to Use
-- Head over to [](github.com/organizations/yourorganization/settings/actions) and grant ```write``` access to your workflow under the Personal Access Token column. This is because by default, workflows have ```read``` access.
+- Create a Personal Access Token (PAT), if you already do not have one and grant ```write``` access to your workflow under the Personal Access Token column. This is because by default, workflows have ```read``` access.
 
 <img width="1271" alt="PAT" src="https://github.com/Mbaoma/AKS-Demo/assets/49791498/034043d1-799f-40e0-be89-8e3e775133f0">
 
+*Generate PAT*
+
 <img width="806" alt="image" src="https://github.com/Mbaoma/AKS-Demo/assets/49791498/06722ea6-72d3-4573-ba62-581929474666">
+
+*Update Permissions*
+
+- In your repository's settings, under the ```Actions``` tab, click on ```General```, scroll to the bottom and enable ```Read and write permissions``` for your ```Workflow Permissions```.
+Click ```Save```.
+
+<img width="1143" alt="image" src="https://github.com/Mbaoma/build-image/assets/49791498/92ff77e4-16a9-4798-85bd-3d0ee9a5cb11">
+
+*Actions Tab*
+
+<img width="1143" alt="image" src="https://github.com/Mbaoma/build-image/assets/49791498/6e8d3834-e10f-4cc1-b320-bfe58e1cfed5">
+
+*Permission Update*
 
 - Add this step to your workflow as follows:
 ```Docker
-name: Publish Docker image
+name: Build, Tag and Publish Docker image to ghcr.io
  
 on: [push]
 
 jobs:
-  push_to_registry:
+  build_tag_push_to_ghcr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
       - name: Build and Push Docker Image
         uses: Mbaoma/build-image@v2.0
 ```
@@ -61,3 +76,5 @@ These automated tagging processes ensures that you can easily track and identify
 ## 🏳️ Defaults
 - Your ```Dockerfile``` has to be in the root directory.
 - Your ```docker image``` is named after your repository.
+
+This workflow is inspired by macbre's work.
